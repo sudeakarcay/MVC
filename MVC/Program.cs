@@ -1,7 +1,16 @@
+using BLL.DAL;
+using BLL.Services;
+
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// IoC (Inversion of Control) Container 
+builder.Services.AddDbContext<Db>(options => options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=StudentDB;Trusted_Connection=True;"));
+builder.Services.AddScoped<IStudentService, StudentService>();
 
 var app = builder.Build();
 
